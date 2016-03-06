@@ -1,30 +1,4 @@
-# Rime schema settings
-# encoding: utf-8
-
-schema:
-  schema_id: wubi98
-  name: "五笔98"
-  version: "0.10"
-  author:
-    - 發明人 王永民
-  description: |
-    五笔98版
-    碼表源自 yanhuacuo
-    敲 z 鍵進入拼音反查
-  dependencies:
-    - pinyin_simp
-
-switches:
-  - name: ascii_mode
-    reset: 0
-    states: [ 中文, 西文 ]
-  - name: full_shape
-    states: [ 半角, 全角 ]
-  - name: ascii_punct
-    states: [ ，。, ，． ]
-  - name: extended_charset
-    states: [ 通用, 增廣 ]
-
+customization: 1917845184
 engine:
   processors:
     - ascii_composer
@@ -45,50 +19,47 @@ engine:
     - punct_translator
     - reverse_lookup_translator
     - table_translator
-
-speller:
-
-  #自动顶屏
-  #auto_select: false
-  auto_select: true
-  delimiter: "~"
-  max_code_length: 4
-  
-
-translator:
-  dictionary: wubi98
-  enable_charset_filter: false
-  enable_sentence: false
-  enable_encoder: false
-  encode_commit_history: false
-  max_phrase_length: 4
-  
-  #逐渐提示
-  #enable_completion: false
-  enable_completion: true
-
-  enable_user_dict: false
-  disable_user_dict_for_patterns:
-    - "^z.*$"
-
-reverse_lookup:
-  dictionary: pinyin_simp
-  prefix: "z"
-  suffix: "'"
-  tips: 〔拼音〕
-  preedit_format:
-    - xform/([nl])v/$1ü/
-    - xform/([nl])ue/$1üe/
-    - xform/([jqxy])v/$1u/
-
+key_binder:
+  bindings:
+    - {accept: Return, send: Escape, when: composing}
+    - {accept: semicolon, send: 2, when: has_menu}
+    - {accept: apostrophe, send: 3, when: has_menu}
+  import_preset: default
 punctuator:
   import_preset: default
-  full_shape:
-  half_shape:
-key_binder:
-  import_preset: default
-
 recognizer:
   import_preset: default
   patterns:
-    reverse_lookup: "^z[a-z]*'?$"
+    reverse_lookup: "^z[a-z]*$"
+reverse_lookup:
+  dictionary: pinyin_simp
+  preedit_format:
+    - "xform/([nljqxy])v/$1ü/"
+  prefix: z
+  tips: "〔拼音〕"
+schema:
+  author:
+    - "發明人 王永民先生"
+  description: |
+    五筆字型98版
+    碼表源自 qq
+    敲 z 鍵進入拼音反查
+    
+  name: "五笔98"
+  schema_id: wubi98
+  version: 0.1.custom.1917845184
+speller:
+  delimiter: " ;'"
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: ["中文", "西文"]
+  - name: full_shape
+    states: ["半角", "全角"]
+  - name: extended_charset
+    states: ["通用", "增廣"]
+translator:
+  dictionary: wubi98
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+  enable_charset_filter: true
