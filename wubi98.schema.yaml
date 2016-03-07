@@ -1,4 +1,4 @@
-customization: 1917845184
+customization: 2235349038
 engine:
   processors:
     - ascii_composer
@@ -21,15 +21,16 @@ engine:
     - table_translator
 key_binder:
   bindings:
-    - {accept: Return, send: Escape, when: composing}
+    - { when: composing, accept: Return, send: Escape }
     - {accept: semicolon, send: 2, when: has_menu}
     - {accept: apostrophe, send: 3, when: has_menu}
   import_preset: default
 punctuator:
-  import_preset: default
+  import_preset: symbols
 recognizer:
   import_preset: default
   patterns:
+    punct: "^/([a-z]+|[0-9])$"
     reverse_lookup: "^z[a-z]*$"
 reverse_lookup:
   dictionary: pinyin_simp
@@ -47,7 +48,7 @@ schema:
     
   name: "五笔98"
   schema_id: wubi98
-  version: 0.1.custom.1917845184
+  version: 0.1.custom.2235349038
 speller:
   delimiter: " ;'"
 switches:
@@ -60,6 +61,10 @@ switches:
     states: ["通用", "增廣"]
 translator:
   dictionary: wubi98
+  enable_charset_filter: true
+  enable_sentence: true
+  enable_encoder: true
+  encode_commit_history: true
+  max_phrase_length: 4
   disable_user_dict_for_patterns:
     - "^z.*$"
-  enable_charset_filter: true
