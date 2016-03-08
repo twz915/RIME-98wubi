@@ -32,7 +32,7 @@ translator:
   enable_user_dict: true #是否開啓用戶詞典
   disable_user_dict_for_patterns: 
     - "^z.*$"
-    - ^[a-x]$
+    - ^[a-y]{1,2}$
 
 engine:
   processors:
